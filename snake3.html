@@ -1,0 +1,102 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <title>Snake</title>
+</head>
+
+<body>
+    <canvas id="canvas" style="border: solid 3px #ccc;" width="600" height="500"></canvas>
+    <script>
+
+        var game = {
+            tickNumber: 0,
+            board: [
+                "#################",
+                "#               #",
+                "#               #",
+                "#               #",
+                "#               #",
+                "#               #",
+                "#     ####      #",
+                "#     ####      #",
+                "#               #",
+                "#               #",
+                "#               #",
+                "#               #",
+                "#               #",
+                "#               #",
+                "#################"
+            ],
+            tick: function () {
+              game.tickNumber++;
+              game.timer = window.setTimeout("game.tick()", 500);
+              console.log(game.tickNumber);
+            }
+        };
+
+
+        var graphics = {
+            canvas: document.getElementById("canvas"),
+            squareSize: 30,
+            drawBoard: function (ctx) {
+
+                var currentYoffset = 0;
+                game.board.forEach(function checkLine(line) {
+                    line = line.split("");
+                    var currentXoffset = 0;
+                    line.forEach(function checkCharacter(character) {
+                        if (character == "#") {
+                            ctx.fillStyle = "black";
+                            ctx.fillRect(currentXoffset, currentYoffset, graphics.squareSize, graphics.squareSize);
+                        } 3000
+                        currentXoffset += graphics.squareSize;
+                    });
+                    currentYoffset += graphics.squareSize;
+                })
+            },
+            drawGame: function () {
+                var ctx = graphics.canvas.getContext("2d");
+                graphics.drawBoard(ctx);
+                snake.drawSnake(ctx);
+            }
+        };
+
+        var snake = {
+            parts: [
+                { x: 4, y: 2 },
+                { x: 3, y: 2 },
+                { x: 2, y: 2 }
+            ],
+            facing: "E",
+            move:function() {
+
+            },
+            drawSnake: function (ctx) {
+
+                snake.parts.forEach(function drawPart(part) {
+                    var partXlocation = part.x * graphics.squareSize;
+                    var partYlocation = part.y * graphics.squareSize;
+                    ctx.fillStyle = "green";
+                    ctx.fillRect(partXlocation, partYlocation, graphics.squareSize,
+                        graphics.squareSize);
+                });
+            }
+        };
+
+        graphics.drawGame();
+        var gameControl = {
+            startGame: function () {
+                game.tick();
+            }
+        };
+        gameControl.startGame();
+
+
+
+
+    </script>
+
+</body>
+
+</html>

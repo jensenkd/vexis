@@ -1,0 +1,60 @@
+<!DOCTYPE>
+<html>
+
+<head>
+</head>
+
+<body>
+  <canvas id="canvas" style="border: solid 3px #ccc;" width="600" height="500"></canvas>
+  <script>
+
+    var game = {
+      board: [
+        "#################",
+        "#               #",
+        "#               #",
+        "#               #",
+        "#               #",
+        "#               #",
+        "#     ####      #",
+        "#     ####      #",
+        "#               #",
+        "#               #",
+        "#               #",
+        "#               #",
+        "#               #",
+        "#               #",
+        "#################"
+      ]
+    };
+
+    var graphics = {
+      canvas: document.getElementById("canvas"),
+      squareSize: 30,
+      drawBoard: function () {
+        var ctx = graphics.canvas.getContext("2d");
+        var currentYoffset = 0;
+        game.board.forEach(function checkLine(line) {
+          line = line.split("");
+          var currentXoffset = 0;
+          line.forEach(function checkCharacter(character) {
+            if (character == "#") {
+              ctx.fillStyle = "black";
+              ctx.fillRect(currentXoffset, currentYoffset, graphics.squareSize, graphics.squareSize);
+            }
+            currentXoffset += graphics.squareSize;
+          });
+          currentYoffset += graphics.squareSize;
+        })
+      }
+    };
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
